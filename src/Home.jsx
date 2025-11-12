@@ -86,7 +86,7 @@ const Home = () => {
           <Link to="/aboutus" className="hover:text-gray-300">
             About
           </Link>
-          <Link to="/contact" className="hover:text-gray-300">
+          <Link to="/contact/" className="hover:text-gray-300">
             Contact
           </Link>
         </div>
