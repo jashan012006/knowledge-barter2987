@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "./firebase"; // ✅ Import Firestore instance
+import { db } from "./firebase";
+import Header from "./Header";
 
 export default function ViewSkill() {
-  const { id } = useParams(); // skill name passed in URL
+  const { id } = useParams(); // e.g. "Web-Dev"
   const navigate = useNavigate();
   const [filteredTeachers, setFilteredTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,11 +13,11 @@ export default function ViewSkill() {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
+        // Normalize: convert "Web-Dev" -> "Web Dev"
+        const skillName = decodeURIComponent(id).replace(/-/g, " ");
+
         const skillsRef = collection(db, "skills");
-        const q = query(
-          skillsRef,
-          where("teach", "==", decodeURIComponent(id))
-        );
+        const q = query(skillsRef, where("teach", "==", skillName));
         const querySnapshot = await getDocs(q);
 
         const skillsList = querySnapshot.docs.map((doc) => ({
@@ -49,21 +50,19 @@ export default function ViewSkill() {
         backgroundPosition: "center",
       }}
     >
-      {/* Header */}
-      <div className="w-full bg-gradient-to-r from-violet-600 to-purple-500 text-white py-4 text-center font-bold text-2xl shadow-md">
-        Knowledge Barter
-      </div>
+      {/* ✅ Reusable Header */}
+      <Header />
 
       {/* Main Content */}
-      <div className="flex flex-col items-center flex-1 py-10 px-4">
+      <div className="flex flex-col items-center flex-1 py-10 px-4 mt-20">
         <h1 className="text-3xl font-bold text-white mb-6 text-center">
-          People teaching "{decodeURIComponent(id)}"
+          People teaching “{decodeURIComponent(id).replace(/-/g, " ")}”
         </h1>
 
         {loading ? (
           <p className="text-white text-lg">Loading...</p>
         ) : filteredTeachers.length === 0 ? (
-          <p className="text-white font-medium text-lg">
+          <p className="text-white font-medium text-lg text-center">
             No one has registered to teach this skill yet.
           </p>
         ) : (
@@ -99,13 +98,13 @@ export default function ViewSkill() {
 
         <button
           onClick={() => navigate("/browse-skill")}
-          className="mt-10 bg-gradient-to-r from-purple-600 to-violet-500 text-white px-6 py-2 rounded-lg font-medium hover:opacity-90"
+          className="mt-10 bg-gradient-to-r from-purple-600 to-violet-500 text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition duration-200"
         >
           ← Back to Browse Skills
         </button>
       </div>
 
-      {/* Footer */}
+      {/* ✅ Footer */}
       <footer className="w-full bg-violet-600 py-4 shadow-inner text-center text-white text-sm">
         © 2025 Knowledge Barter. All rights reserved.
       </footer>
