@@ -203,7 +203,8 @@ export default function BrowseSkills() {
                 <p className="text-gray-700">{card.learn}</p>
                 <p className="text-sm text-gray-500">{card.category}</p>
                 <button
-                  onClick={() => navigate(`/view/${encodeURIComponent(card.teach)}`)}
+onClick={() => navigate(`/view/${encodeURIComponent(card.teach)}`)}
+
                   className="w-[100px] py-1 font-bold bg-violet-500 rounded-lg text-white hover:bg-violet-600"
                 >
                   View
