@@ -6,7 +6,7 @@ import { auth, db } from "./firebase";
 export default function ChatRoom() {
   const { chatId } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();   
+  const navigate = useNavigate();
 
   const receiverUid = location.state?.receiverUid;
   const receiverName = location.state?.receiverName;
@@ -59,10 +59,10 @@ export default function ChatRoom() {
       }}
     >
 
+      {/* Header */}
       <div className="fixed top-0 w-full bg-white/20 backdrop-blur-lg shadow-md text-white py-4 px-6 flex justify-between items-center">
         <h2 className="text-xl font-semibold">Chat with {receiverName}</h2>
 
-        {/* ✅ RECENT CHATS BUTTON FIXED */}
         <button
           className="bg-white/20 text-white px-4 py-2 rounded-lg backdrop-blur-md hover:bg-white/30"
           onClick={() => navigate("/chat-list")}
@@ -71,22 +71,32 @@ export default function ChatRoom() {
         </button>
       </div>
 
+
       <div className="flex-1 mt-20 px-4 overflow-y-auto">
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`my-3 flex ${
+            className={`flex w-full mb-4 ${
               msg.senderUid === user.uid ? "justify-end" : "justify-start"
             }`}
           >
             <div
-              className={`px-4 py-2 rounded-xl max-w-[70%] shadow-md ${
-                msg.senderUid === user.uid
-                  ? "bg-violet-600 text-white"
-                  : "bg-white text-gray-800"
-              }`}
+              className={`relative px-4 py-2 max-w-[70%] rounded-2xl shadow-md 
+                ${
+                  msg.senderUid === user.uid
+                    ? "bg-violet-600 text-white rounded-br-none"
+                    : "bg-white text-gray-800 rounded-bl-none"
+                }
+              `}
             >
               {msg.text}
+
+              <div className="text-[10px] opacity-70 mt-1">
+                {msg.timestamp?.toDate?.().toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
             </div>
           </div>
         ))}
@@ -101,6 +111,7 @@ export default function ChatRoom() {
           placeholder="Type a message..."
           className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-violet-500 outline-none"
         />
+
         <button
           onClick={sendMessage}
           className="bg-violet-600 text-white px-6 py-2 rounded-lg hover:bg-violet-700 transition"
