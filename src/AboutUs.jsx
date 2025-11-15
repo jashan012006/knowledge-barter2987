@@ -20,7 +20,7 @@ const About = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      {/* Navbar */}
+ 
       <nav
         className={`fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50 transition-all duration-500 ${
           isScrolled
@@ -29,18 +29,11 @@ const About = () => {
         }`}
       >
         <div className="text-2xl font-bold">
-          Knowledge<span className="text-violet-200">Barter</span>
-        </div>
-        <div className="flex space-x-6 font-medium">
-          <Link to="/home" className="hover:text-gray-300">Home</Link>
-          <Link to="/browse-skill" className="hover:text-gray-300">Browse Skills</Link>
-          <Link to="/post-skill" className="hover:text-gray-300">Post Skill</Link>
-          <Link to="/about" className="hover:text-gray-300">About</Link>
-          <Link to="/contact" className="hover:text-gray-300">Contact</Link>
+          Knowledge Barter
         </div>
       </nav>
 
-      {/* About Section */}
+
       <section className="flex flex-col items-center justify-center text-center pt-28 pb-16 px-6">
         <div className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-3xl p-8 shadow-lg max-w-3xl">
           <h1 className="text-4xl font-bold mb-4 text-white">About Us</h1>
@@ -52,7 +45,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission Section */}
+ 
       <section className="py-12 px-6 text-center">
         <div className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-3xl max-w-4xl mx-auto p-8 shadow-lg">
           <h2 className="text-3xl font-semibold mb-4 text-violet-200">Our Mission</h2>
@@ -64,7 +57,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+
       <section className="text-center px-6 pb-16">
         <h2 className="text-3xl font-semibold mb-10 text-violet-200">Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
@@ -88,7 +81,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Footer */}
+
       <footer className="bg-violet-700/90 backdrop-blur-sm text-white py-6 mt-10">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between">
           <div>
